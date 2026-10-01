@@ -8,7 +8,7 @@ Other sources: Gemini
 Author: Ana Gonzalez Yuil
 Creation Date: 9.30.26
 Revision Date: 10.1.26
-Revisions: N/A
+Revisions: added user file input
 */
 
 #include <iostream>
@@ -16,6 +16,7 @@ Revisions: N/A
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <fstream>
 
 /**
  * @struct Date
@@ -239,14 +240,21 @@ std::string trim(const std::string& str) {
 
 int main() {
     // Optimize standard I/O operations for performance
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
+    // commented out and added cin input because it would not work otherwise
+    // std::ios_base::sync_with_stdio(false);
+    // std::cin.tie(NULL);
 
     EmailMaxHeap emailHeap;
     std::string line;
+    std::string userFile;
+
+    std::cout <<"give file: ";
+    std::cin >> userFile;
+
+    std::ifstream myFile(userFile);
 
     // Read commands line-by-line from standard input (file redirected via cin)
-    while (std::getline(std::cin, line)) {
+    while (std::getline(myFile, line)) {
         line = trim(line);
         if (line.empty()) continue;
 
