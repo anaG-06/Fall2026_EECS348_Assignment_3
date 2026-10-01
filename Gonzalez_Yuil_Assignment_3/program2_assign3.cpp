@@ -8,7 +8,7 @@ Other sources: CoPilot
 Author: Ana Gonzalez Yuil
 Creation Date: 9.30.26
 Revision Date: 10.1.26
-Revisions: N/A
+Revisions: additional comments, fix inbox object error, output text formatting
 */
 
 #include <iostream>
@@ -16,6 +16,7 @@ Revisions: N/A
 #include <vector>
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -350,6 +351,7 @@ void processEmailCommand(const string& line,
     string subject;
     string date;
 
+    //splits command line with getline using comma as delimiter 
     getline(ss, sender, ',');
     getline(ss, subject, ',');
     getline(ss, date);
@@ -423,15 +425,15 @@ int main()
                 Email nextEmail = inbox.getMax();
 
                 cout << "Next Email:" << endl;
-                cout << "Sender: "
+                cout << setw(10) << "Sender: "
                      << nextEmail.senderCategory
                      << endl;
 
-                cout << "Subject: "
+                cout << setw(10) << "Subject: "
                      << nextEmail.subject
                      << endl;
 
-                cout << "Date: "
+                cout << setw(10) << "Date: "
                      << nextEmail.date
                      << endl;
             }
@@ -446,7 +448,7 @@ int main()
         */
         else if (line == "READ")
         {
-            if (ibriefnbox.empty())
+            if (inbox.empty())
             {
                 cout << "No unread emails." << endl;
             }
